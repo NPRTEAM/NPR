@@ -12,7 +12,7 @@ server <- function(input, output) {
   #    re-executed when inputs (input$bins) change
   # 2. Its output type is a plot
   output$distPlot <- renderPlot({
-    x    <- faithful$waiting
+    x    <- rnorm(1000)
     bins <- seq(min(x), max(x), length.out = input$bins + 1)
     hist(x, breaks = bins, col = "red", border = "black",
          xlab = "Waiting time to next eruption (in mins)",
