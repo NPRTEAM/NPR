@@ -5,6 +5,14 @@ library(shiny)
 ui <- fluidPage(
   # App title ----
   titlePanel("Hello Shiny!"),
+  
+  fluidRow(
+    column(3,
+           h3("Single checkbox"),
+           checkboxInput("checkbox", "Choice A", value = TRUE))
+  ),
+  
+  
   # Sidebar layout with input and output definitions ----
   sidebarLayout(
     # Sidebar panel for inputs ----
