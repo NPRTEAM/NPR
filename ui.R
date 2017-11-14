@@ -8,8 +8,12 @@ ui <- fluidPage(
   
   fluidRow(
     column(3,
-           h3("Single checkbox"),
-           checkboxInput("checkbox", "Choice A", value = TRUE))
+           checkboxGroupInput("checkGroup", 
+                              h3("Grupa checkboxow"), 
+                              choices = list("Wybor 1" = 1, 
+                                             "Wybor  2" = 2, 
+                                             "Wybor  3" = 3),
+                              selected = 3))
   ),
   
   
