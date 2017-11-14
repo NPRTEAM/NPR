@@ -13,7 +13,7 @@ ui <- fluidPage(
       sliderInput(inputId = "bins",
                   label = "Number of bins:",
                   min = 1,
-                  max = 60,
+                  max = 75,
                   value = 30)
     ),
     # Main panel for displaying outputs ----
