@@ -14,7 +14,8 @@ ui <- fluidPage(
                   label = "Number of bins:",
                   min = 1,
                   max = 75,
-                  value = 30)
+                  value = 30),
+      actionButton("button", "MAX")
     ),
     # Main panel for displaying outputs ----
     mainPanel(
