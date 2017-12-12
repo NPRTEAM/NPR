@@ -1,38 +1,39 @@
 #+ATTR_LATEX: :options fontsize=\scriptsize 
 #+BEGIN_SRC R :eval no :exports code
 library(shiny)
+
+filePath = paste0(getSrcDirectory(function(x) {x}), "/currencyFunctions.R", "")
+source(filePath)
+
 # Define UI for app that draws a histogram ----
 ui <- fluidPage(
   # App title ----
-  titlePanel("Hello Shiny!"),
+  titlePanel("Kalkulator"),
   
-  fluidRow(
-    column(3,
-           checkboxGroupInput("checkGroup", 
-                              h3("Grupa checkboxow"), 
-                              choices = list("Wybor 1" = 1, 
-                                             "Wybor  2" = 2, 
-                                             "Wybor  3" = 3),
-                              selected = 3))
-  ),
-  
-  
+  currencyList <- getCodes()[[1]][],
   # Sidebar layout with input and output definitions ----
   sidebarLayout(
     # Sidebar panel for inputs ----
     sidebarPanel(
       # Input: Slider for the number of bins ----
-      sliderInput(inputId = "bins",
-                  label = "Number of bins:",
-                  min = 1,
-                  max = 75,
-                  value = 30),
-      actionButton("button", "MAX")
+      selectInput("currFrom", 
+                  label = "Choose base currency",
+                  choices = getNames()[[1]][],
+        ),
+      
+      numericInput("currValBase", "Value:", 10, min = 1, max = 100),
+      
+      selectInput("currTo", 
+                  label = "Choose target currency",
+                  choices = getNames()[[1]][],
+      ),
+      
+      textOutput("currValTo")
     ),
     # Main panel for displaying outputs ----
     mainPanel(
       # Output: Histogram ----
-      plotOutput(outputId = "distPlot")
+      #plotOutput(outputId = "distPlot")
     )
   )
 )

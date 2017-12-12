@@ -18,5 +18,10 @@ server <- function(input, output) {
          xlab = "Waiting time to next eruption (in mins)",
          main = "Histogram of waiting times")
     })
+  
+  output$currValTo <- renderText({
+      paste("Target value: ", getValueByName(input$currFrom) / getValueByName(input$currTo) * input$currValBase) 
+  }
+  )
 }
 #+END_SRC

@@ -28,10 +28,18 @@ getValues <- function() {
 
 getValueByCode <- function(code) {
   database <- fromJSON(filePath)
-  indexOfCode = which(testowa$rates[[1]][2] == "USD")
+  indexOfCode = which(database$rates[[1]][2] == code)
+  return (database$rates[[1]][indexOfCode,3])
+}
+
+getValueByName <- function(name) {
+  database <- fromJSON(filePath)
+  indexOfName = which(database$rates[[1]][1] == name)
+  return (database$rates[[1]][indexOfName,3])
 }
 
 updateDatabase <- function() {
   updatedTable <- fromJSON(baseLink)
+  updatedTable$rates[[1]][nrow(updatedTable$rates[[1]])+1,] <- c("polski złoty","PLN",1.0)
   write_json(updatedTable,filePath)
 }
