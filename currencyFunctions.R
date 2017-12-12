@@ -40,5 +40,6 @@ getValueByName <- function(name) {
 
 updateDatabase <- function() {
   updatedTable <- fromJSON(baseLink)
+  updatedTable$rates[[1]][nrow(updatedTable$rates[[1]])+1,] <- c("polski złoty","PLN",1.0)
   write_json(updatedTable,filePath)
 }
