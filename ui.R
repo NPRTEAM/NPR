@@ -8,7 +8,7 @@ source(filePath)
 # Define UI for app that draws a histogram ----
 ui <- fluidPage(
   # App title ----
-  titlePanel("Kalkulator"),
+  titlePanel("Currency calculator"),
   
   currencyList <- getCodes()[[1]][],
   # Sidebar layout with input and output definitions ----
