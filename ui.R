@@ -10,7 +10,6 @@ ui <- fluidPage(
   # App title ----
   titlePanel("Currency calculator"),
   
-  currencyList <- getCodes()[[1]][],
   # Sidebar layout with input and output definitions ----
   sidebarLayout(
     # Sidebar panel for inputs ----
@@ -18,14 +17,15 @@ ui <- fluidPage(
       # Input: Slider for the number of bins ----
       selectInput("currFrom", 
                   label = "Choose base currency",
-                  choices = getNames()[[1]][],
+                  choices = getNames(),
+                  selected = getNames()[[1]][36],
         ),
       
-      numericInput("currValBase", "Value:", 10, min = 1, max = 100),
+      numericInput("currValBase", "Value:", 1, min = 1, max = 100),
       
       selectInput("currTo", 
                   label = "Choose target currency",
-                  choices = getNames()[[1]][],
+                  choices = getNames(),
       ),
       
       textOutput("currValTo")
