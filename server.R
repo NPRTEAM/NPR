@@ -11,17 +11,27 @@ server <- function(input, output) {
   # 1. It is "reactive" and therefore should be automatically
   #    re-executed when inputs (input$bins) change
   # 2. Its output type is a plot
-  output$distPlot <- renderPlot({
-    x    <- rnorm(1000)
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
-    hist(x, breaks = bins, col = "red", border = "black",
-         xlab = "Waiting time to next eruption (in mins)",
-         main = "Histogram of waiting times")
-    })
+  #output$distPlot <- renderPlot({
+  #  x    <- rnorm(1000)
+  #  bins <- seq(min(x), max(x), length.out = input$bins + 1)
+  #  hist(x, breaks = bins, col = "red", border = "black",
+  #       xlab = "Waiting time to next eruption (in mins)",
+  #       main = "Histogram of waiting times")
+  #  })
   
   output$currValTo <- renderText({
       paste("Target value: ", getValueByName(input$currFrom) / getValueByName(input$currTo) * input$currValBase) 
-  }
-  )
+  })
+  
+  output$lastUpdate <- renderText({
+    paste("Last update: ", getDatabaseDate())
+  })
+  
+  observeEvent(input$updateButton, {
+    updateDatabase()
+    output$lastUpdate <- renderText({
+      paste("Last update: ", getDatabaseDate())
+    })
+  })
 }
 #+END_SRC
