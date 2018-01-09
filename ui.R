@@ -39,7 +39,10 @@ ui <- fluidPage(
                     label = "Choose target currency",
                     choices = getNames(),
                     selected = getNames()[[1]][36],multiple = TRUE
-        )
+        ),
+        dateRangeInput('dateRange',
+                       label = 'Date range',
+                       start = as.Date(getDatabaseDate()) - 10, end = as.Date(getDatabaseDate()))
         
       ),
       mainPanel()
