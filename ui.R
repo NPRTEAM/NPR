@@ -28,7 +28,23 @@ ui <- fluidPage(
         mainPanel()
       )
     ),
-    tabPanel("Chart")
+    tabPanel("Chart",sidebarLayout(
+      sidebarPanel(
+        selectInput("baseCurr", 
+                    label = "Choose base currency",
+                    choices = getNames(),
+                    selected = getNames()[[1]][8],
+        ),
+        selectInput("plotCurr", 
+                    label = "Choose target currency",
+                    choices = getNames(),
+                    selected = getNames()[[1]][36],multiple = TRUE
+        )
+        
+      ),
+      mainPanel()
+    )
+    )
   )
 )
 
