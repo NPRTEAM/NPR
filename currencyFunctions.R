@@ -8,6 +8,12 @@ latestLink = "http://api.nbp.pl/api/exchangerates/tables/a/?format=json"
 timeRangeLink = 'http://api.nbp.pl/api/exchangerates/rates/a/%s/%s/%s/?format=json'
 jsonFilePath = paste0(getSrcDirectory(function(x) {x}), "/latest-currencies.json", "")
 
+
+calculateCurrency <- function(baseCurrency,targetCurrency){
+ return (getValueByName(baseCurrency) / getValueByName(targetCurrency))
+}
+
+
 getDatabaseDate <- function() {
   database <- fromJSON(jsonFilePath)
   return (database$effectiveDate)
