@@ -27,6 +27,15 @@ server <- function(input, output) {
     paste("Last update: ", getDatabaseDate())
   })
   
+  output$fromDate <- renderText({
+    paste(input$dateRange[1])
+  })
+  
+  output$toDate <- renderText({
+    paste(input$dateRange[2])
+  })
+  
+  
   observeEvent(input$updateButton, {
     updateDatabase()
     output$lastUpdate <- renderText({

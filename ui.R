@@ -35,14 +35,19 @@ ui <- fluidPage(
                     choices = getNames(),
                     selected = getNames()[[1]][8],
         ),
-        selectInput("plotCurr", 
+        selectizeInput("plotCurr", 
                     label = "Choose target currency",
                     choices = getNames(),
-                    selected = getNames()[[1]][36],multiple = TRUE
+                    selected = getNames()[[1]][36],
+                    multiple = TRUE,
+                    options = list(maxItems = 5)
+                    
         ),
         dateRangeInput('dateRange',
                        label = 'Date range',
                        start = as.Date(getDatabaseDate()) - 10, end = as.Date(getDatabaseDate()))
+        ,textOutput("fromDate")
+        
         
       ),
       mainPanel()
