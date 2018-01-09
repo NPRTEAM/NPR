@@ -20,7 +20,8 @@ server <- function(input, output) {
   #  })
   
   output$currValTo <- renderText({
-      paste("Target value: ", getValueByName(input$currFrom) / getValueByName(input$currTo) * input$currValBase) 
+    v = getValueByName(input$currFrom) / getValueByName(input$currTo) * input$currValBase;
+    paste(format(v, digits=3))
   })
   
   output$lastUpdate <- renderText({

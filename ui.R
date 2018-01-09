@@ -12,26 +12,38 @@ source(filePath)
 ui <- fluidPage(
   navbarPage("Currency Converter",
     tabPanel("Calculator",
-      sidebarLayout(
-        sidebarPanel(
+      fixedRow(
+        column(width = 4,
           selectInput("currFrom", 
-            label = "Choose base currency",
-            choices = getNames(),
-            selected = getNames()[[1]][8]
-          ),
-          numericInput("currValBase", "Value:", 1, min = 1, max = 100),
+          label = "Choose base currency",
+          choices = getNames(),
+          selected = getNames()[[1]][8],)),
+      
+        column(width = 4, 
+          numericInput("currValBase", "Value:", 1, min = 1, max = 100)),
+                  
+        column(width = 4,                
           selectInput("currTo", 
-            label = "Choose target currency",
-            choices = getNames(),
-            selected = getNames()[[1]][36]
-          ),
-                          
-          textOutput("currValTo"),
-          textOutput("lastUpdate"), actionButton("updateButton", "Update")
-        ),
-        mainPanel()
-      )
+          label = "Choose target currency",
+          choices = getNames(),
+          selected = getNames()[[1]][36]))),
+                        
+      fixedRow(
+        br(),
+        column(width = 12, h1("Target value: "), align="center"), 
+        br(),
+        column(width = 12, h2(textOutput("currValTo")), align="center"),
+        br()),
+                        
+      fixedRow(
+        br(),
+        column(width = 12, textOutput("lastUpdate"), align="right"),
+        br(),
+        br(),
+        column(width = 12, actionButton("updateButton", "Update"), align="right"))
+      
     ),
+    
     tabPanel("Chart",sidebarLayout(
       sidebarPanel(
         selectInput("baseCurr", 
