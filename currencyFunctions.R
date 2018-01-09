@@ -1,7 +1,8 @@
-# wymagana instalacja libcurl4-openssl-dev w menedzerze pakietow
+# do jsonlite i curl wymagana instalacja libcurl4-openssl-dev w menedzerze pakietow
 
 library(jsonlite)
 library(curl)
+library(plotly)
 
 latestLink = "http://api.nbp.pl/api/exchangerates/tables/a/?format=json"
 timeRangeLink = 'http://api.nbp.pl/api/exchangerates/rates/a/%s/%s/%s/?format=json'

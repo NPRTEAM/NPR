@@ -1,5 +1,9 @@
 #+ATTR_LATEX: :options fontsize=\scriptsize 
 #+BEGIN_SRC R :eval no :exports code
+
+# do plotly wymagana instalacja "gfortran" i "libssl-dev" poprzez sudo apt-get install
+# sam plotly moze wymagac uprzedniej instalacji "openssl", hexbin" i "httr" poprzez install.packages()
+
 library(shiny)
 
 filePath = paste0(getSrcDirectory(function(x) {x}), "/currencyFunctions.R", "")
