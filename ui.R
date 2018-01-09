@@ -17,13 +17,13 @@ ui <- fluidPage(
           selectInput("currFrom", 
             label = "Choose base currency",
             choices = getNames(),
-            selected = getNames()[[1]][8],
+            selected = getNames()[[1]][8]
           ),
           numericInput("currValBase", "Value:", 1, min = 1, max = 100),
           selectInput("currTo", 
             label = "Choose target currency",
             choices = getNames(),
-            selected = getNames()[[1]][36],
+            selected = getNames()[[1]][36]
           ),
                           
           textOutput("currValTo"),
@@ -37,7 +37,7 @@ ui <- fluidPage(
         selectInput("baseCurr", 
                     label = "Choose base currency",
                     choices = getNames(),
-                    selected = getNames()[[1]][8],
+                    selected = getNames()[[1]][8]
         ),
         selectizeInput("plotCurr", 
                     label = "Choose target currency",

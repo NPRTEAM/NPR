@@ -8,6 +8,11 @@ latestLink = "http://api.nbp.pl/api/exchangerates/tables/a/?format=json"
 timeRangeLink = 'http://api.nbp.pl/api/exchangerates/rates/a/%s/%s/%s/?format=json'
 jsonFilePath = paste0(getSrcDirectory(function(x) {x}), "/latest-currencies.json", "")
 
+checkIfJsonExists <- function() {
+  if (!file.exists(jsonFilePath)) {
+    updateDatabase()
+  }
+}
 
 calculateCurrency <- function(baseCurrency,targetCurrency){
  return (getValueByName(baseCurrency) / getValueByName(targetCurrency))
@@ -15,32 +20,38 @@ calculateCurrency <- function(baseCurrency,targetCurrency){
 
 
 getDatabaseDate <- function() {
+  checkIfJsonExists()
   database <- fromJSON(jsonFilePath)
   return (database$effectiveDate)
 }
 
 getNames <- function() {
+  checkIfJsonExists()
   database <- fromJSON(jsonFilePath)
   return (database$rates[[1]][1])
 }
 
 getCodes <- function() {
+  checkIfJsonExists()
   database <- fromJSON(jsonFilePath)
   return (database$rates[[1]][2])
 }
 
 getValues <- function() {
+  checkIfJsonExists()
   database <- fromJSON(jsonFilePath)
   return (database$rates[[1]][3])
 }
 
 getValueByCode <- function(code) {
+  checkIfJsonExists()
   database <- fromJSON(jsonFilePath)
   indexOfCode = which(database$rates[[1]][2] == code)
   return (database$rates[[1]][indexOfCode,3])
 }
 
 getValueByName <- function(name) {
+  checkIfJsonExists()
   database <- fromJSON(jsonFilePath)
   indexOfName = which(database$rates[[1]][1] == name)
   return (database$rates[[1]][indexOfName,3])
@@ -53,11 +64,13 @@ updateDatabase <- function() {
 }
 
 getValuesFromRangeByCode <- function(code, dateFrom, dateTo) {
+  checkIfJsonExists()
   database <- fromJSON(sprintf(timeRangeLink, code, dateFrom, dateTo))
   return (database$rates$mid)
 }
 
 getValuesFromRangeByName <- function(name, dateFrom, dateTo) {
+  checkIfJsonExists()
   database <- fromJSON(jsonFilePath)
   indexOfName = which(database$rates[[1]][1] == name)
   codeFromIndex = database$rates[[1]][indexOfName,2]
