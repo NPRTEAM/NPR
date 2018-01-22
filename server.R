@@ -24,7 +24,8 @@ server <- function(input, output) {
       shiny::need(length(input$plotCurr)>0,"Wybierz co najmniej jedną walutę"),
       shiny::need(('polski złoty' %in% input$plotCurr) == FALSE,"Nie można wybrać Polskiego Złotego, gdyż jest on walutą bazową"),
       shiny::need(input$dateRange[1]<input$dateRange[2],"Błędny format zakresu dat"),
-      shiny::need(input$dateRange[2]<=as.Date(getDatabaseDate()), "Nie zaimplementowano funkcji jasnowidza")
+      shiny::need(input$dateRange[2]<=as.Date(getDatabaseDate()), "Nie zaimplementowano funkcji jasnowidza"),
+      shiny::need(input$dateRange[2]-input$dateRange[1]<=365,"Wykres może być narysowany tylko dla rocznego zakresu dat")
     )
     dataFrame <- getPlotDataframe(input$plotCurr, paste(input$dateRange[1]), paste(input$dateRange[2]))
     ggplot(dataFrame, aes(x = Data, y = Wartość, color = Waluta)) + geom_line() +
