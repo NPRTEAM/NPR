@@ -11,26 +11,26 @@ source(filePath)
 
 ui <- fluidPage(
   navbarPage("Currency Converter",
-    tabPanel("Calculator",
+    tabPanel("Konwerter",
       fixedRow(
         column(width = 4,
           selectInput("currFrom", 
-          label = "Choose base currency",
+          label = "Waluta bazowa",
           choices = getNames(),
-          selected = getNames()[[1]][8],)),
+          selected = getNames()[[1]][8])),
       
         column(width = 4, 
-          numericInput("currValBase", "Value:", 1, min = 1, max = 100)),
+          numericInput("currValBase", "Kwota bazowa:", 1, min = 1, max = 1000)),
                   
         column(width = 4,                
           selectInput("currTo", 
-          label = "Choose target currency",
+          label = "Waluta docelowa",
           choices = getNames(),
           selected = getNames()[[1]][36]))),
                         
       fixedRow(
         br(),
-        column(width = 12, h1("Target value: "), align="center"), 
+        column(width = 12, h1("Kwota docelowa: "), align="center"), 
         br(),
         column(width = 12, h2(textOutput("currValTo")), align="center"),
         br()),
@@ -40,39 +40,30 @@ ui <- fluidPage(
         column(width = 12, textOutput("lastUpdate"), align="right"),
         br(),
         br(),
-        column(width = 12, actionButton("updateButton", "Update"), align="right"))
+        column(width = 12, actionButton("updateButton", "Aktualizuj"), align="right"))
       
     ),
     
-    tabPanel("Chart",sidebarLayout(
+    tabPanel("Wykres",sidebarLayout(
       sidebarPanel(
-        selectInput("baseCurr", 
-                    label = "Choose base currency",
-                    choices = getNames(),
-                    selected = getNames()[[1]][8]
-        ),
         selectizeInput("plotCurr", 
-                    label = "Choose target currency",
+                    label = "Wybierz walutę (waluty)",
                     choices = getNames(),
-                    selected = getNames()[[1]][36],
+                    selected = getNames()[[1]][1],
                     multiple = TRUE,
                     options = list(maxItems = 5)
-                    
         ),
         dateRangeInput('dateRange',
-                       label = 'Date range',
-                       start = as.Date(getDatabaseDate()) - 10, end = as.Date(getDatabaseDate()))
-        ,textOutput("fromDate")
-        
-        
+                       label = 'Zakres walut',
+                       start = as.Date(getDatabaseDate()) - 10, end = as.Date(getDatabaseDate())
+        )
       ),
-      mainPanel()
+      mainPanel(
+        textOutput("error"),
+        plotlyOutput("currencyPlot")
+      )
     )
     )
   )
 )
-
-
-  
-
 #+END_SRC
