@@ -14,9 +14,9 @@ checkIfJsonExists <- function() {
   }
 }
 
-calculateCurrency <- function(baseCurrency,targetCurrency){
- return (getValueByName(baseCurrency) / getValueByName(targetCurrency))
-}
+#calculateCurrency <- function(baseCurrency,targetCurrency){
+# return (getValueByName(baseCurrency) / getValueByName(targetCurrency))
+#}
 
 
 getDatabaseDate <- function() {

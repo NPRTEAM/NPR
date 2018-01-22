@@ -10,7 +10,7 @@ filePath = paste0(getSrcDirectory(function(x) {x}), "/currencyFunctions.R", "")
 source(filePath)
 
 ui <- fluidPage(
-  navbarPage("Currency Converter",
+  navbarPage("Konwerter walut",
     tabPanel("Konwerter",
       fixedRow(
         column(width = 4,
@@ -55,7 +55,7 @@ ui <- fluidPage(
         ),
         dateRangeInput('dateRange',
                        label = 'Zakres walut',
-                       start = as.Date(getDatabaseDate()) - 10, end = as.Date(getDatabaseDate())
+                       start = as.Date(getDatabaseDate()) - 30, end = as.Date(getDatabaseDate())
         )
       ),
       mainPanel(
