@@ -77,3 +77,19 @@ getValuesFromRangeByName <- function(name, dateFrom, dateTo) {
   database <- fromJSON(sprintf(timeRangeLink, codeFromIndex, dateFrom, dateTo))
   return (database$rates$mid)
 }
+
+getPlotDataframe <- function(names, dateFrom, dateTo) {
+  checkIfJsonExists()
+  localDatabase <- fromJSON(jsonFilePath)
+  frame <- data.frame()
+  for(name in names) {
+    indexOfName = which(localDatabase$rates[[1]][1] == name)
+    codeFromIndex = localDatabase$rates[[1]][indexOfName,2]
+    remoteDatabase <- fromJSON(sprintf(timeRangeLink, codeFromIndex, dateFrom, dateTo))
+    currName <- name
+    values <- remoteDatabase$rates$mid
+    dates <- as.Date(remoteDatabase$rates$effectiveDate)
+    frame <- rbind(frame,data.frame(Waluta=currName, Wartość=values, Data=dates))
+  }
+  return (frame)
+}
