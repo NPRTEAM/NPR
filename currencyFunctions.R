@@ -6,7 +6,7 @@ library(plotly)
 
 latestLink = "http://api.nbp.pl/api/exchangerates/tables/a/?format=json"
 timeRangeLink = 'http://api.nbp.pl/api/exchangerates/rates/a/%s/%s/%s/?format=json'
-jsonFilePath = paste0(getSrcDirectory(function(x) {x}), "/latest-currencies.json", "")
+jsonFilePath = "latest-currencies.json"
 
 checkIfJsonExists <- function() {
   if (!file.exists(jsonFilePath)) {

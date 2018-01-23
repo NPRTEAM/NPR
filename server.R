@@ -4,7 +4,7 @@
 server <- function(input, output) {
   output$currValTo <- renderText({
     v = getValueByName(input$currFrom) / getValueByName(input$currTo) * input$currValBase;
-    paste(format(v, digits=3))
+    paste(format(round(v, 2), nsmall = 2))
   })
   
   output$lastUpdate <- renderText({
@@ -28,7 +28,7 @@ server <- function(input, output) {
       shiny::need(input$dateRange[2]-input$dateRange[1]<=365,"Wykres może być narysowany tylko dla rocznego zakresu dat")
     )
     dataFrame <- getPlotDataframe(input$plotCurr, paste(input$dateRange[1]), paste(input$dateRange[2]))
-    ggplot(dataFrame, aes(x = Data, y = Wartość, color = Waluta)) + geom_line() +
+    ggplot(dataFrame, aes(x = Data, y = Wartość, color = Waluta)) + geom_line() + geom_point() +
     labs(x = "Data", y = "Wartość", title = "Wykres walut") +
     scale_color_hue("Waluta", l = 70, c = 150)
   })
